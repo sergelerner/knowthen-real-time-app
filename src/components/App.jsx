@@ -1,5 +1,39 @@
 import React, { Component } from 'react';
-import ChannelSection from './channels/ChannelSection.jsx';
+import ChannelSection from './channels/index.jsx';
+import styled, { ThemeProvider } from 'styled-components';
+
+import Styles from './styles/index.js';
+
+const AppWrapper = styled.main`
+  display: flex;
+  flex-direction: row;
+  margin: ${props => props.theme.spaceL};
+  box-shadow: 0 0 50px rgba(0,0,0,.1);
+`;
+
+const AppSidePanel = styled.aside`
+  width: ${props => props.theme.sidePanelW};
+`;
+
+const AppMainPanel = styled.section`
+  width: calc(100% - ${props => props.theme.sidePanelW});
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  align-items: center;
+
+  background: #ededed;
+`;
+
+const theme = {
+  spaceM: '15px',
+  spaceL: '50px',
+  sidePanelW: '300px',
+  color: {
+    a: 'deepskyblue',
+    b: 'lightsteelblue',
+  },
+};
 
 class App extends Component {
   constructor(props) {
@@ -25,12 +59,20 @@ class App extends Component {
     const { channels } = this.state;
 
     return (
-      <main>
-        <ChannelSection 
-          channels={channels}
-          addChannel={this.addChannel.bind(this)}
-          setChannel={this.setChannel.bind(this)}/>
-      </main>
+      <ThemeProvider theme={theme}>
+        <AppWrapper>
+          <AppSidePanel>
+            <ChannelSection 
+              channels={channels}
+              addChannel={this.addChannel.bind(this)}
+              setChannel={this.setChannel.bind(this)}/>
+          </AppSidePanel>
+
+          <AppMainPanel>
+            <p>comming soon...</p>
+          </AppMainPanel>
+        </AppWrapper>
+      </ThemeProvider>
     );
   }
 }

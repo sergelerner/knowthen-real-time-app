@@ -1,5 +1,11 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
+import styled from 'styled-components';
+
+const ChannelItem = styled.li`
+  margin: 15px 0;
+  color: ${props => props.theme.color.b};
+`;
 
 class Channel extends Component {
   onClick() {
@@ -10,11 +16,11 @@ class Channel extends Component {
   render() {
     const { channel } = this.props;
     return (
-      <li>
+      <ChannelItem>
         <a onClick={this.onClick.bind(this)}>
           { channel.name }
         </a>
-      </li>
+      </ChannelItem>
     );
   }
 }
